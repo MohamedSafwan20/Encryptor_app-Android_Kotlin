@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Encryptor</string>
+    <string name="pin_mismatch_error">PIN mismatch.</string>
+    <string name="pin_blank_error">PIN cannot be empty.</string>
+    <string name="register_error">User registration failed</string>
+    <string name="login_error">Incorrect PIN</string>
+    <string name="main_blank_error">Two fields are required</string>
+</resources>

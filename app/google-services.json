@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "440874555366",
+    "project_id": "encryptor-d8822",
+    "storage_bucket": "encryptor-d8822.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:440874555366:android:8c9dfa9841064cfec22827",
+        "android_client_info": {
+          "package_name": "com.microcodes.encryptor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "440874555366-2icai3ahlu2f9gvdk5mqgh6lo9h8chak.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLId198NDqmrIaEvnfdschWF2SSW8Gocs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "440874555366-2icai3ahlu2f9gvdk5mqgh6lo9h8chak.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
