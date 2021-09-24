@@ -31,19 +31,19 @@ class MainActivity : AppCompatActivity() {
 
             val isValid = isValidData(message, data)
             if (isValid == 0) {
-                val res = Db().saveEncryption(message, data, deviceId)
+                val res = Db().saveEncryption(message, data, "000")
 
                 if (res) {
                     findViewById<EditText>(R.id.message).setText("")
                     findViewById<EditText>(R.id.data).setText("")
                     Toast.makeText(this, "Data Encryption Successful", Toast.LENGTH_LONG).show()
                     Helpers.redirectTo(this, EncryptedDataListActivity())
-                }
-                else Toast.makeText(this, "Error making encryption", Toast.LENGTH_LONG).show()
+                } else Toast.makeText(this, "Error making encryption", Toast.LENGTH_LONG).show()
 
             } else {
                 errorText.text = resources.getString(isValid)
             }
+            TODO("change deviceId")
         }
 
         findViewById<Button>(R.id.encryptListActivityBtn).setOnClickListener {

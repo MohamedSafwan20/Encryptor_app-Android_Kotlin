@@ -1,7 +1,5 @@
 package com.microcodes.encryptor.utils
 
-import android.annotation.SuppressLint
-import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FieldValue
@@ -12,7 +10,6 @@ import com.google.firebase.firestore.ktx.getField
 import com.google.firebase.ktx.Firebase
 import com.microcodes.encryptor.models.User
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class Db(private val db: FirebaseFirestore = Firebase.firestore) {
@@ -71,7 +68,13 @@ class Db(private val db: FirebaseFirestore = Firebase.firestore) {
                             .document(it!!.documents[0].id)
                             .update(
                                 "encryptions",
-                                FieldValue.arrayUnion(mapOf("message" to message, "value" to data, "hash" to data.hashCode().toString()))
+                                FieldValue.arrayUnion(
+                                    mapOf(
+                                        "message" to message,
+                                        "value" to data,
+                                        "hash" to data.hashCode().toString()
+                                    )
+                                )
                             )
                     }
             )
@@ -103,25 +106,21 @@ class Db(private val db: FirebaseFirestore = Firebase.firestore) {
                 db.collection("users")
                     .whereEqualTo("deviceId", deviceId)
                     .get().addOnSuccessListener {
-//                        db.collection("users")
-//                            .document(it!!.documents[0].id)
-//                            .update(
-//                                "encryptions",
-//                                FieldValue.arrayUnion(mapOf("message" to message, "value" to data, "hash" to data.hashCode().toString()))
-//                            )
-                        val data = it.documents[0].getField<Any>("encryptions")
-                            println(data)
+                        val data =
+                            it.documents[0].getField<Any>("encryptions") as List<Map<String, String>>
+                        for (item in data) {
+                            if (item["hash"] == hash) {
+                                db.collection("users")
+                                    .document(it.documents[0].id)
+                                    .update(
+                                        "encryptions",
+                                        FieldValue.arrayRemove(item)
+                                    )
+                            }
+                        }
 
                     }
             )
-//            if (res.size() > 0) {
-//                for (item in it.documents) {
-//                    for (data in item["encryptions"] as List<Map<String, String>> ) {
-//                        println(data["message"])
-//                    }
-//                }
-//            }
-
         }
         return res.size() > 0
     }
