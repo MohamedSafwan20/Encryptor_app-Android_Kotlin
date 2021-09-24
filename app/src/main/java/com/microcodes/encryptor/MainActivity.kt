@@ -49,6 +49,10 @@ class MainActivity : AppCompatActivity() {
             Helpers.redirectTo(this, EncryptedDataListActivity())
         }
 
+        findViewById<Button>(R.id.decryptActivityBtn).setOnClickListener {
+            Helpers.redirectTo(this, DecryptActivity())
+        }
+
     }
 
     private fun isValidData(message: String, data: String): Int {

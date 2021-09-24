@@ -10,14 +10,14 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Encryptor"
-    >
+        android:theme="@style/Theme.Encryptor">
+        <activity
+            android:name=".DecryptActivity"
+            android:exported="true" />
         <activity
             android:name=".EncryptedDataListActivity"
             android:exported="true"
-            android:parentActivityName=".MainActivity"
-            >
-        </activity>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".utils.LauncherActivity"
             android:exported="true"
@@ -38,8 +38,7 @@
             android:noHistory="true" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
     </application>
 
 </manifest>
