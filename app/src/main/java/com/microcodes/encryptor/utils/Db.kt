@@ -125,4 +125,25 @@ class Db(private val db: FirebaseFirestore = Firebase.firestore) {
         }
         return res.size() > 0
     }
+
+    fun getEncryption(hash: String, deviceId: String): Map<String, String> {
+        lateinit var res: QuerySnapshot
+
+        runBlocking(Dispatchers.IO) {
+            res = Tasks.await(
+                db.collection("users")
+                    .whereEqualTo("deviceId", deviceId)
+                    .get()
+            )
+        }
+        @Suppress("UNCHECKED_CAST")
+        val data =
+            res.documents[0].getField<Any>("encryptions") as List<Map<String, String>>
+        for (item in data) {
+            if (item["hash"] == hash) {
+                return item
+            }
+        }
+        return emptyMap()
+    }
 }

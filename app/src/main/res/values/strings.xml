@@ -5,4 +5,5 @@
     <string name="register_error">User registration failed</string>
     <string name="login_error">Incorrect PIN</string>
     <string name="main_blank_error">Two fields are required</string>
+    <string name="decrypt_hash_error">Invalid Hashcode</string>
 </resources>
