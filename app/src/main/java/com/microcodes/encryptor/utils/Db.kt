@@ -92,7 +92,7 @@ class Db(private val db: FirebaseFirestore = Firebase.firestore) {
                     .get()
             )
         }
-
+        @Suppress("UNCHECKED_CAST")
         return if (res.size() > 0) res.documents[0]["encryptions"] as List<Map<String, String>>
         else emptyList()
     }
@@ -106,6 +106,7 @@ class Db(private val db: FirebaseFirestore = Firebase.firestore) {
                 db.collection("users")
                     .whereEqualTo("deviceId", deviceId)
                     .get().addOnSuccessListener {
+                        @Suppress("UNCHECKED_CAST")
                         val data =
                             it.documents[0].getField<Any>("encryptions") as List<Map<String, String>>
                         for (item in data) {

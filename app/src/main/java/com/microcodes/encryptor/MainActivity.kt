@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
             val isValid = isValidData(message, data)
             if (isValid == 0) {
-                val res = Db().saveEncryption(message, data, "000")
+                val res = Db().saveEncryption(message, data, deviceId)
 
                 if (res) {
                     findViewById<EditText>(R.id.message).setText("")
@@ -43,7 +43,6 @@ class MainActivity : AppCompatActivity() {
             } else {
                 errorText.text = resources.getString(isValid)
             }
-            TODO("change deviceId")
         }
 
         findViewById<Button>(R.id.encryptListActivityBtn).setOnClickListener {
