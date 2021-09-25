@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.provider.Settings
 import androidx.appcompat.app.AppCompatActivity
 import com.microcodes.encryptor.LoginActivity
+import com.microcodes.encryptor.R
 import com.microcodes.encryptor.RegisterActivity
 
 class LauncherActivity : AppCompatActivity() {

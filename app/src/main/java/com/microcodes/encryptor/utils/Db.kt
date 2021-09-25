@@ -93,7 +93,7 @@ class Db(private val db: FirebaseFirestore = Firebase.firestore) {
             )
         }
         @Suppress("UNCHECKED_CAST")
-        return if (res.size() > 0) res.documents[0]["encryptions"] as List<Map<String, String>>
+        return if (res.documents[0].contains("encryptions")) res.documents[0]["encryptions"] as List<Map<String, String>>
         else emptyList()
     }
 

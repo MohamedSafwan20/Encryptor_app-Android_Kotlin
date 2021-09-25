@@ -1,5 +1,8 @@
 package com.microcodes.encryptor.recyclerViews
 
+import android.app.AlertDialog
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.SharedPreferences
 import android.view.LayoutInflater
@@ -9,6 +12,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.microcodes.encryptor.R
 import com.microcodes.encryptor.utils.Db
@@ -41,15 +45,37 @@ class DataListRecyclerView(context: Context, private val items: MutableList<Map<
             }
 
             findViewById<Button>(R.id.deleteItemBtn).setOnClickListener {
-                val res = Db().deleteDataItem(
-                    deviceId,
-                    hashTextField.text.toString()
+                AlertDialog.Builder(context).setTitle("Are you Sure?")
+                    .setMessage("The hash ${items[position]["hash"]} wil be removed permanently.")
+                    .setPositiveButton("Yes") { _, _ ->
+                        val res = Db().deleteDataItem(
+                            deviceId,
+                            hashTextField.text.toString()
+                        )
+
+                        if (res) {
+                            items.removeAt(position)
+                            notifyItemRemoved(position)
+                        }
+                    }
+                    .setNegativeButton("No") { dialog, _ ->
+                        dialog.cancel()
+                    }
+                    .create().show()
+
+            }
+
+            findViewById<Button>(R.id.copyHashBtn).setOnClickListener {
+                val clipBoard: ClipboardManager =
+                    context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                clipBoard.setPrimaryClip(
+                    ClipData.newPlainText(
+                        "hash",
+                        findViewById<EditText>(R.id.hashTextField).text
+                    )
                 )
 
-                if (res) {
-                    items.removeAt(position)
-                    notifyItemRemoved(position)
-                }
+                Toast.makeText(context, "Hash copied to clipboard", Toast.LENGTH_LONG).show()
             }
         }
     }
